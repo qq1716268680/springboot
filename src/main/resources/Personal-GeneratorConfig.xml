@@ -35,14 +35,19 @@
         <!-- 实体包对应映射文件位置及名称，默认存放在src目录下 -->
         <sqlMapGenerator targetPackage="com.example.yxw.dao" targetProject="src/main/java" />
 
+        <!--生成Dao类存放位置-->
+         <javaClientGenerator type="XMLMAPPER" targetPackage="com.example.yxw.dao" targetProject="src">
+             <property name="enableSubPackages" value="true"/>
+        </javaClientGenerator>
+
         <!-- 配置表
             schema：不用填写
             tableName: 表名
             enableCountByExample、enableSelectByExample、enableDeleteByExample、enableUpdateByExample、selectByExampleQueryId：
             去除自动生成的例子
         -->
-        <table schema="" tableName="user" enableCountByExample="false" enableSelectByExample="true"
-               enableDeleteByExample="false" enableUpdateByExample="true" selectByExampleQueryId="true" >
+        <table schema="" tableName="monster" enableCountByExample="false" enableSelectByExample="false"
+               enableDeleteByExample="false" enableUpdateByExample="false" selectByExampleQueryId="false" >
         </table>
     </context>
 </generatorConfiguration>
