@@ -1,225 +1,78 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="com.example.yxw.dao.MonsterMapper">
-  <resultMap id="BaseResultMap" type="com.example.yxw.domain.Monster">
-    <result column="id" jdbcType="VARCHAR" property="id" />
-    <result column="name" jdbcType="VARCHAR" property="name" />
-    <result column="star" jdbcType="INTEGER" property="star" />
-    <result column="atk" jdbcType="INTEGER" property="atk" />
-    <result column="def" jdbcType="INTEGER" property="def" />
-    <result column="race" jdbcType="VARCHAR" property="race" />
-    <result column="attribute" jdbcType="VARCHAR" property="attribute" />
-    <result column="effect" jdbcType="VARCHAR" property="effect" />
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.example.yxw.dao.MonsterMapper" >
+  <resultMap id="BaseResultMap" type="com.example.yxw.domain.Monster" >
+    <result column="id" property="id" jdbcType="VARCHAR" />
+    <result column="name" property="name" jdbcType="VARCHAR" />
+    <result column="star" property="star" jdbcType="INTEGER" />
+    <result column="atk" property="atk" jdbcType="INTEGER" />
+    <result column="def" property="def" jdbcType="INTEGER" />
+    <result column="race" property="race" jdbcType="VARCHAR" />
+    <result column="attribute" property="attribute" jdbcType="VARCHAR" />
+    <result column="effect" property="effect" jdbcType="VARCHAR" />
+    <result column="imgurl" property="imgUrl" jdbcType="VARCHAR" />
   </resultMap>
-  <insert id="insert" parameterType="com.example.yxw.domain.Monster">
+  <insert id="insert" parameterType="com.example.yxw.domain.Monster" >
     insert into monster (id, name, star, 
       atk, def, race, attribute, 
-      effect)
+      effect,imgUrl)
     values (#{id,jdbcType=VARCHAR}, #{name,jdbcType=VARCHAR}, #{star,jdbcType=INTEGER}, 
       #{atk,jdbcType=INTEGER}, #{def,jdbcType=INTEGER}, #{race,jdbcType=VARCHAR}, #{attribute,jdbcType=VARCHAR}, 
-      #{effect,jdbcType=VARCHAR})
+      #{effect,jdbcType=VARCHAR},#{imgUrl,jdbcType=VARCHAR})
   </insert>
-  <insert id="insertSelective" parameterType="com.example.yxw.domain.Monster">
+  <insert id="insertSelective" parameterType="com.example.yxw.domain.Monster" >
     insert into monster
-    <trim prefix="(" suffix=")" suffixOverrides=",">
-      <if test="id != null">
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
         id,
       </if>
-      <if test="name != null">
+      <if test="name != null" >
         name,
       </if>
-      <if test="star != null">
+      <if test="star != null" >
         star,
       </if>
-      <if test="atk != null">
+      <if test="atk != null" >
         atk,
       </if>
-      <if test="def != null">
+      <if test="def != null" >
         def,
       </if>
-      <if test="race != null">
+      <if test="race != null" >
         race,
       </if>
-      <if test="attribute != null">
+      <if test="attribute != null" >
         attribute,
       </if>
-      <if test="effect != null">
+      <if test="effect != null" >
         effect,
       </if>
     </trim>
-    <trim prefix="values (" suffix=")" suffixOverrides=",">
-      <if test="id != null">
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
         #{id,jdbcType=VARCHAR},
       </if>
-      <if test="name != null">
+      <if test="name != null" >
         #{name,jdbcType=VARCHAR},
       </if>
-      <if test="star != null">
+      <if test="star != null" >
         #{star,jdbcType=INTEGER},
       </if>
-      <if test="atk != null">
+      <if test="atk != null" >
         #{atk,jdbcType=INTEGER},
       </if>
-      <if test="def != null">
+      <if test="def != null" >
         #{def,jdbcType=INTEGER},
       </if>
-      <if test="race != null">
+      <if test="race != null" >
         #{race,jdbcType=VARCHAR},
       </if>
-      <if test="attribute != null">
+      <if test="attribute != null" >
         #{attribute,jdbcType=VARCHAR},
       </if>
-      <if test="effect != null">
+      <if test="effect != null" >
         #{effect,jdbcType=VARCHAR},
       </if>
     </trim>
   </insert>
-  <resultMap id="BaseResultMap" type="com.example.yxw.domain.Monster">
-    <result column="id" jdbcType="VARCHAR" property="id" />
-    <result column="name" jdbcType="VARCHAR" property="name" />
-    <result column="star" jdbcType="INTEGER" property="star" />
-    <result column="atk" jdbcType="INTEGER" property="atk" />
-    <result column="def" jdbcType="INTEGER" property="def" />
-    <result column="race" jdbcType="VARCHAR" property="race" />
-    <result column="attribute" jdbcType="VARCHAR" property="attribute" />
-    <result column="effect" jdbcType="VARCHAR" property="effect" />
-  </resultMap>
-  <sql id="Update_By_Example_Where_Clause">
-    <where>
-      <foreach collection="example.oredCriteria" item="criteria" separator="or">
-        <if test="criteria.valid">
-          <trim prefix="(" prefixOverrides="and" suffix=")">
-            <foreach collection="criteria.criteria" item="criterion">
-              <choose>
-                <when test="criterion.noValue">
-                  and ${criterion.condition}
-                </when>
-                <when test="criterion.singleValue">
-                  and ${criterion.condition} #{criterion.value}
-                </when>
-                <when test="criterion.betweenValue">
-                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
-                </when>
-                <when test="criterion.listValue">
-                  and ${criterion.condition}
-                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
-                    #{listItem}
-                  </foreach>
-                </when>
-              </choose>
-            </foreach>
-          </trim>
-        </if>
-      </foreach>
-    </where>
-  </sql>
-  <insert id="insert" parameterType="com.example.yxw.domain.Monster">
-    insert into monster (id, name, star, 
-      atk, def, race, attribute, 
-      effect)
-    values (#{id,jdbcType=VARCHAR}, #{name,jdbcType=VARCHAR}, #{star,jdbcType=INTEGER}, 
-      #{atk,jdbcType=INTEGER}, #{def,jdbcType=INTEGER}, #{race,jdbcType=VARCHAR}, #{attribute,jdbcType=VARCHAR}, 
-      #{effect,jdbcType=VARCHAR})
-  </insert>
-  <insert id="insertSelective" parameterType="com.example.yxw.domain.Monster">
-    insert into monster
-    <trim prefix="(" suffix=")" suffixOverrides=",">
-      <if test="id != null">
-        id,
-      </if>
-      <if test="name != null">
-        name,
-      </if>
-      <if test="star != null">
-        star,
-      </if>
-      <if test="atk != null">
-        atk,
-      </if>
-      <if test="def != null">
-        def,
-      </if>
-      <if test="race != null">
-        race,
-      </if>
-      <if test="attribute != null">
-        attribute,
-      </if>
-      <if test="effect != null">
-        effect,
-      </if>
-    </trim>
-    <trim prefix="values (" suffix=")" suffixOverrides=",">
-      <if test="id != null">
-        #{id,jdbcType=VARCHAR},
-      </if>
-      <if test="name != null">
-        #{name,jdbcType=VARCHAR},
-      </if>
-      <if test="star != null">
-        #{star,jdbcType=INTEGER},
-      </if>
-      <if test="atk != null">
-        #{atk,jdbcType=INTEGER},
-      </if>
-      <if test="def != null">
-        #{def,jdbcType=INTEGER},
-      </if>
-      <if test="race != null">
-        #{race,jdbcType=VARCHAR},
-      </if>
-      <if test="attribute != null">
-        #{attribute,jdbcType=VARCHAR},
-      </if>
-      <if test="effect != null">
-        #{effect,jdbcType=VARCHAR},
-      </if>
-    </trim>
-  </insert>
-  <update id="updateByExampleSelective" parameterType="map">
-    update monster
-    <set>
-      <if test="record.id != null">
-        id = #{record.id,jdbcType=VARCHAR},
-      </if>
-      <if test="record.name != null">
-        name = #{record.name,jdbcType=VARCHAR},
-      </if>
-      <if test="record.star != null">
-        star = #{record.star,jdbcType=INTEGER},
-      </if>
-      <if test="record.atk != null">
-        atk = #{record.atk,jdbcType=INTEGER},
-      </if>
-      <if test="record.def != null">
-        def = #{record.def,jdbcType=INTEGER},
-      </if>
-      <if test="record.race != null">
-        race = #{record.race,jdbcType=VARCHAR},
-      </if>
-      <if test="record.attribute != null">
-        attribute = #{record.attribute,jdbcType=VARCHAR},
-      </if>
-      <if test="record.effect != null">
-        effect = #{record.effect,jdbcType=VARCHAR},
-      </if>
-    </set>
-    <if test="_parameter != null">
-      <include refid="Update_By_Example_Where_Clause" />
-    </if>
-  </update>
-  <update id="updateByExample" parameterType="map">
-    update monster
-    set id = #{record.id,jdbcType=VARCHAR},
-      name = #{record.name,jdbcType=VARCHAR},
-      star = #{record.star,jdbcType=INTEGER},
-      atk = #{record.atk,jdbcType=INTEGER},
-      def = #{record.def,jdbcType=INTEGER},
-      race = #{record.race,jdbcType=VARCHAR},
-      attribute = #{record.attribute,jdbcType=VARCHAR},
-      effect = #{record.effect,jdbcType=VARCHAR}
-    <if test="_parameter != null">
-      <include refid="Update_By_Example_Where_Clause" />
-    </if>
-  </update>
 </mapper>

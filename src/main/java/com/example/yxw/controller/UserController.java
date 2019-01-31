@@ -9,18 +9,18 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.ModelAndView;
 
-@RestController("/")
+@Controller
 public class UserController {
 
     @Autowired
     private UserService userService;
 
-    @RequestMapping("show")
+    @RequestMapping("/show")
     public User getIndex(String username) {
         return userService.selectUserByName(username);
     }
 
-    @RequestMapping("index")
+    @RequestMapping(value="/index")
     public ModelAndView getIndex() {
         ModelAndView modelAndView = new ModelAndView();
         modelAndView.setViewName("layout1.html");
