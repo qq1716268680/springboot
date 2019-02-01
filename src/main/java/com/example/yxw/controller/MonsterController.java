@@ -5,22 +5,35 @@ import com.alibaba.fastjson.JSONArray;
 import com.alibaba.fastjson.JSONObject;
 import com.example.yxw.domain.Monster;
 import com.example.yxw.service.MonsterService;
+import com.example.yxw.util.Result;
+import com.example.yxw.util.ResultUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.ModelAndView;
 
-@Controller
+import javax.servlet.http.HttpServletRequest;
+import java.util.List;
+
+@RestController
 public class MonsterController {
 
 
     @Autowired
     private MonsterService monsterService;
 
+    @RequestMapping("/listMonster")
+    public Result listMonster(HttpServletRequest request) {
+
+        List list = monsterService.listAll();
+        return ResultUtil.success(request,list);
+    }
+
     @RequestMapping("/addMonster")
     public ModelAndView getIndex() {
-        String s = "{'cards':[{'id':'1262','hash_id':'ZXsv2','password':'23995346'," +
+        /*String s = "{'cards':[{'id':'1262','hash_id':'ZXsv2','password':'23995346'," +
                 "'name':'蓝眼究极龙','name_ja':'青眼の究極竜','name_en':" +
                 "'Blue-Eyes Ultimate Dragon','locale':'3'," +
                 "'type_st':'怪兽|融合','type_val':'1'," +
@@ -57,7 +70,7 @@ public class MonsterController {
             m.setImgUrl(obj.getString("img_url"));
             monsterService.insert(m);
         }
-
+*/
         ModelAndView modelAndView = new ModelAndView();
         modelAndView.setViewName("addMonster.html");
         return modelAndView;

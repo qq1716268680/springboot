@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>所有怪兽</title>
+    <!--BASE CSS-->
+    <link rel="stylesheet" href="css/base/base.css" />
+    <link rel="stylesheet" href="assets/global/plugins/bootstrap/css/bootstrap.min.css" />
+    <!--STATE CSS-->
+    <!--MODULE CSS-->
+    <link rel="stylesheet" href="assets/admin/pages/css/login.css" />
+    <link rel="stylesheet" href="css/module/input.css" />
+    <!--LAYOUT CSS-->
+    <link rel="stylesheet" href="assets/global/css/components.css">
+</head>
+<body >
+<table id="grid" class="table table-striped table-bordered table-hover" cellpadding="0" cellspacing="0" border="0" class="display" width="100%">
+    <thead id="grid_head">
+    <tr>
+        <th class="table-checkbox" style="width:40px"><input class="group-checkable" type="checkbox" onclick="selectAll(this)"></th>
+        <th>怪兽名称</th>
+        <th>星级</th>
+        <th>攻击力</th>
+        <th>防御力</th>
+        <th>属性</th>
+        <th>种族</th>
+        <th>效果</th>
+        <th>图片</th>
+        <th style="width:90px">操作</th>
+    </tr>
+    </thead>
+    <tbody id="grid_body"></tbody>
+</table>
+<div class="paging-toolbar">
+    <ul id='grid_paging'></ul>
+</div>
+</body>
+<script src="assets/global/plugins/jquery-1.11.0.min.js"></script>
+<script>
+    $(document).ready(function(){
+//        var  htmlobj=$.ajax({url:"/listMonster",async:false});
+        $.ajax( {type:"GET",
+            url: "/listMonster",
+            data:null,
+            dataType: "json",
+            success: function(data) {
+                    debugger;
+                $.each(data.data, function (i, item) {
+                    //显示名称，图标，排序，功能ID,菜单可见,Web连接地址,Web菜单图标，系统编号,
+                    var tr = "<tr>";
+                    tr += "<td><input class='checkboxes' type=\"checkbox\" name=\"checkbox\" value=" + item.id + "></td>";
+                    tr += "<td>" + item.name + "</td>";
+                    tr += "<td>" + item.level + "</td>";
+                    tr += "<td>" + item.atk + "</td>";
+                    tr += "<td>" + item.def + "</td>";
+                    tr += "<td>" + item.attribute + "</td>";
+                    tr += "<td>" + item.race + "</td>";
+                    tr += "<td>" + item.effect + "</td>";
+                    tr += "<td><img  src='" + item.imgUrl + "'/></td>";
+//                    tr += getActionHtml(item.ID);
+                    tr += "<td> </td>";
+                    tr += "</tr>";
+                    $("#grid_body").append(tr);
+                });
+            }
+        });
+    });
+    //根据条件查询并绑定结果
+    function Search(poge) {
+        var condition = $("#ffSearch").serialize();
+        SearchCondition(page, condition);
+//        Ajax调用后台|
+    }
+    function SearchCondition(page, condition) {
+            gCondition = condition;
+            url ="/Menu/FindWithPager?page=" + page + "&rows=" + rows;
+            $.getJS0N(url +"&" + condition, function (data) {
+                $("#totalCount").text(data.total);
+                $("#totalPageCount").text (Math.ceil(data.total / rows));
+                $("#grid_body").html("");
+                $.each(data, function (i, item) {
+                    //显示名称，图标，排序，功能ID,菜单可见,Web连接地址,Web菜单图标，系统编号,
+                    var tr = "<tr>";
+                    tr += "<td><input class='checkboxes' type=\"checkbox\" name=\"checkbox\" value=" + item.ID + "></td>";
+                    tr += "<td>" + item.Name +"</td>";
+                    tr += "<td>" + item.Seq + "</td>";
+                    tr += "<td>" + item.Functionld +"</td>";
+                    if (item.Visible) {
+                    //tr += "<td>" + item.Visible + M</td>";
+                        tr += "<td><span class='label label-success'>可见</spanx/td>";
+                    } else {
+                        tr += "<td><span class='label label-danger'>不可见</span></td>";
+                    }
+                    tr += "<td>" + item.Url + "</td>";
+                    tr += "<td>" + item.Weblcon + "</td>";
+                    tr += "<td>" + item.SystemType_ID+"</td>";
+                    tr += getActionHtml(item.ID);
+                    tr += "</tr>";
+                    $("#grid_body").append(tr);
+                 });
+            });
+    }
+</script>
+</html>

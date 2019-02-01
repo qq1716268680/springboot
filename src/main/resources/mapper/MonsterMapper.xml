@@ -20,6 +20,15 @@
       #{atk,jdbcType=INTEGER}, #{def,jdbcType=INTEGER}, #{race,jdbcType=VARCHAR}, #{attribute,jdbcType=VARCHAR}, 
       #{effect,jdbcType=VARCHAR},#{imgUrl,jdbcType=VARCHAR})
   </insert>
+
+  <select id="listAll" resultMap="BaseResultMap">
+    select id, name, star,
+      atk, def, race, attribute,
+      effect,imgUrl
+     from monster
+
+  </select>
+
   <insert id="insertSelective" parameterType="com.example.yxw.domain.Monster" >
     insert into monster
     <trim prefix="(" suffix=")" suffixOverrides="," >
